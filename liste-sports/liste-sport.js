@@ -90,7 +90,7 @@ bouttons.forEach(boutton => {
                     op.innerHTML = sport.innerHTML
                     op.value = sport.value
                     sport.remove()
-                    dispSports = document.querySelectorAll('#pref>option')
+                    dispSports = document.querySelectorAll('#dispos>option')
 
 
                 }
