@@ -3,7 +3,7 @@ let full;
 let empty;
 let stand;
 //console.log(container);
-container.addEventListener('click', () => {
+container.addEventListener('mouseover', () => {
     const pieces = container.children
     console.log(typeof pieces);
     for (let i = 0; i < pieces.length; i++) {
@@ -30,7 +30,8 @@ container.addEventListener('click', () => {
             piece.setAttribute('draggable', true);
 
             piece.addEventListener('dragstart', sendData)
-            piece.addEventListener('dragleave', () => {
+            
+            piece.addEventListener('dragend', () => {
                 piece.style['background-color'] = 'white'
                 piece.innerHTML = "";
             })
@@ -44,6 +45,7 @@ container.addEventListener('click', () => {
             
             piece.addEventListener('drop', () => {
                 piece.style['background-color'] = 'red'
+                piece.style['color'] = 'white'
             })
             
             piece.addEventListener('drop', receiveData)
