@@ -1,7 +1,4 @@
 const container = document.getElementById('container')
-let full;
-let empty;
-let stand;
 //console.log(container);
 container.addEventListener('mouseover', () => {
     const pieces = container.children
@@ -14,14 +11,18 @@ container.addEventListener('mouseover', () => {
         const receiveData = (e) => {
             const data = e.dataTransfer.getData('text/plain')
             if (!piece.textContent.includes(data)) {
-                piece.textContent = `${data} ${piece.textContent}`
+                piece.textContent = `${data}${piece.textContent}`
             }
         }
 
         const makeDropper = (e) => {
             e.preventDefault()
         }
-
+        piece.addEventListener('dragover', () => {
+            if (!(piece.classList.contains('moving'))) {
+                piece.draggable = false;
+            }
+        })
         piece.removeEventListener('dragover', makeDropper)
         piece.addEventListener('dragover', makeDropper)
 
@@ -30,10 +31,14 @@ container.addEventListener('mouseover', () => {
             piece.setAttribute('draggable', true);
 
             piece.addEventListener('dragstart', sendData)
+            piece.addEventListener('dragstart', () => {
+                piece.setAttribute('class', 'moving')
+            })
             
             piece.addEventListener('dragend', () => {
                 piece.style['background-color'] = 'white'
                 piece.innerHTML = "";
+                piece.removeAttribute('class')
             })
            
         
